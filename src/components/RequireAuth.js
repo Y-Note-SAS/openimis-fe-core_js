@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  grow1: {
+    flexGrow: 1,
+  },
   grow: {
     flexGrow: 1,
   },
@@ -63,17 +66,19 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     backgroundColor: theme.palette.secondary.second,
-    color: theme.palette.text.primary
   },
-  
+  toolbarDrawer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
   toolbarDrawerLogout: {
     color: theme.palette.text.primary,
     button: {
-      margin: theme.spacing(2),
+      margin: theme.spacing(0),
       color: theme.palette.text.primary,
     },
   },
-  
   appBarShift: {
     width: `calc(100% - ${theme.menu.drawer.width})`,
     marginLeft: theme.menu.drawer.width,
@@ -221,7 +226,7 @@ const RequireAuth = (props) => {
   const auth = useAuthentication();
   // TODO: deprecate openimis-fe-core_js as a module config key
   const menuLeft = modulesManager.getConf("openimis-fe-core_js", "menuLeft")
-    || modulesManager.getConf("fe-core", "menuLeft") || false;
+    || modulesManager.getConf("fe-core", "menuLeft") || true;
   const calendarSwitch = modulesManager.getConf(
     "fe-core",
     "allowSecondCalendar",
@@ -241,9 +246,10 @@ const RequireAuth = (props) => {
     <>
       <AppBar position="fixed" className={classes.appBarDrawer}>
         <Toolbar className={classes.toolbarDrawer}>
-          <Contributions {...others} contributionKey={APP_BAR_CONTRIBUTION_KEY}>
-            <div className={classes.grow} />
-          </Contributions>
+          <div className={classes.grow}/>
+          <Contributions {...others} contributionKey={APP_BAR_CONTRIBUTION_KEY}/>
+          <div className={classes.grow}/>
+          <LanguageQuickPicker />
           <LogoutButton className={classes.toolbarDrawerLogout}/>
           <Help />
         </Toolbar>
