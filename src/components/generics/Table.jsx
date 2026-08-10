@@ -71,6 +71,10 @@ const StyledTable = styled("div")(({ theme }) => ({
   "& .clickable": {
     cursor: "pointer",
   },
+  "& .detailRowCell": {
+    padding: 0,
+    verticalAlign: "top",
+  },
   "& .loader": {
     position: "absolute",
     top: 0,
