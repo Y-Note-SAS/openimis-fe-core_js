@@ -24,8 +24,19 @@ export function formatMessageWithValues(intl, module, id, values) {
   }
 }
 
-export function formatAmount(intl, amount) {
-  return `${intl.formatMessage({ id: "currency" })} ${amount || 0}`;
+export function formatAmount(mm, intl, amount) {
+  const thousandSeparator = mm.getConf("fe-core", "thousandSeparator", "fr");
+  const numberOfDecimals = mm.getConf("fe-core", "numberOfDecimals", 0);
+  const number = amount || 0;
+  if (!!thousandSeparator) {
+    const formattedAmount = new Intl.NumberFormat(thousandSeparator, {
+      minimumFractionDigits: numberOfDecimals,
+      maximumFractionDigits: numberOfDecimals,
+    }).format(number);
+    return `${intl.formatMessage({ id: "currency" })} ${formattedAmount}`;
+  }
+  const formattedAmount = Number(amount).toFixed(numberOfDecimals);
+  return `${intl.formatMessage({ id: "currency" })} ${formattedAmount}`;
 }
 
 export function formatDateFromISO(mm, intl, date) {
@@ -69,7 +80,7 @@ export function useTranslations(moduleName, modulesManager) {
   return {
     formatDateFromISO: formatDateFromISO.bind(null, modulesManager, intl),
     formatDateTimeFromISO: formatDateTimeFromISO.bind(null, modulesManager, intl),
-    formatAmount: formatAmount.bind(null, intl),
+    formatAmount: formatAmount.bind(null, modulesManager, intl),
     formatMessage: moduleName ? formatMessage.bind(null, intl, moduleName) : formatMessage.bind(null, intl),
     formatMessageWithValues: moduleName
       ? formatMessageWithValues.bind(null, intl, moduleName)

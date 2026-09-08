@@ -79,6 +79,9 @@ It is dedicated to be deployed as a module of [openimis-fe_js](https://github.co
 - `formatMessage`: provide the translation of a module-prefixed key (fall back on openimis-fe_js/translations/ref.json)
 - `formatMessageWithValues`: provide the translation of a module-prefixed key, for messages with vairable parts
 - `formatAmount`: format an amount as a string
+    with config
+    - `fe-core`, "thousandSeparator", "fr" (default). Locale/type of thousands separator: "fr" = space thousands separator and comma decimal part; "en" = comma thousands separator and dot decimal part. Set default value `""` to disable formatting.
+    - `fe-core`, "numberOfDecimals", 0 (default). Number of decimals to display (0 = no digits after the decimal point).
 - `formatDateFromISO`: parse ISO date into (local) datetime
 
   Note: depends on the selected calendar (Gregorian vs. Nepali)
