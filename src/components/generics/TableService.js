@@ -240,10 +240,11 @@ class Table extends Component {
                       <table style={{ width: "100%" }}>
                         {(items.length - iidx) == items.length && (
                           <tr>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[0]} /></TableCell>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[1]} /></TableCell>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[2]} /></TableCell>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[3]} /></TableCell>
+                            {localHeaders.map((header, headerIndex) => (
+                              <TableCell key={`header-${headerIndex}`}>
+                                {!!header && <FormattedMessage module={module} id={header} />}
+                              </TableCell>
+                            ))}
                           </tr>
                         )}
                         <tr>
@@ -300,10 +301,11 @@ class Table extends Component {
                       <table style={{ width: "100%" }}>
                         {(items.length - iidx) == items.length && (
                           <tr>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[0]} /></TableCell>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[1]} /></TableCell>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[2]} /></TableCell>
-                            <TableCell><FormattedMessage module={module} id={localHeaders[3]} /></TableCell>
+                            {localHeaders.map((header, headerIndex) => (
+                              <TableCell key={`header-${headerIndex}`}>
+                                {!!header && <FormattedMessage module={module} id={header} />}
+                              </TableCell>
+                            ))}
                           </tr>
                         )}
                         <tr>
